@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TEST_QUESTIONS } from '../data/historicalData'
 
-const API_URL = 'http://localhost:3000'
+const API_URL = 'https://lab5-backend-ssz7.onrender.com'
 
 export default function Test({ user }) {
   const [answers, setAnswers] = useState({})

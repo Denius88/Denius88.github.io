@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { PROGRESS_DATA } from '../data/historicalData'
 
-const API_URL = 'http://localhost:3000'
+const API_URL = 'https://lab5-backend-ssz7.onrender.com'
 
 export default function ProgressChart({ user }) {
   const [testResults, setTestResults] = useState(null)
