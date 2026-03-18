@@ -13,26 +13,44 @@ app.use(cors())
 app.use(express.json())
 
 // Initialize Firebase Admin
-const serviceAccount = {
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  privateKeyId: process.env.FIREBASE_PRIVATE_KEY_ID,
-  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-  clientId: process.env.FIREBASE_CLIENT_ID,
-  authUri: process.env.FIREBASE_AUTH_URI,
-  tokenUri: process.env.FIREBASE_TOKEN_URI,
-  authProviderX509CertUrl: process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
-  clientX509CertUrl: process.env.FIREBASE_CLIENT_X509_CERT_URL
-}
+let serviceAccount;
 
 try {
+  // Try to parse from BASE64 env var first
+  if (process.env.FIREBASE_SERVICE_ACCOUNT_BASE64) {
+    const decoded = Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_BASE64, 'base64').toString('utf-8')
+    serviceAccount = JSON.parse(decoded)
+  } else {
+    // Fallback to individual env vars with cleanup
+    serviceAccount = {
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      privateKeyId: process.env.FIREBASE_PRIVATE_KEY_ID,
+      privateKey: (process.env.FIREBASE_PRIVATE_KEY || '')
+        .replace(/\\n/g, '\n')
+        .replace(/"/g, '')
+        .trim(),
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      clientId: process.env.FIREBASE_CLIENT_ID,
+      authUri: process.env.FIREBASE_AUTH_URI,
+      tokenUri: process.env.FIREBASE_TOKEN_URI,
+      authProviderX509CertUrl: process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+      clientX509CertUrl: process.env.FIREBASE_CLIENT_X509_CERT_URL
+    }
+  }
+
+  console.log('📋 Firebase Config Check:')
+  console.log('  - projectId:', serviceAccount.projectId ? '✅' : '❌')
+  console.log('  - clientEmail:', serviceAccount.clientEmail ? '✅' : '❌')
+  console.log('  - privateKey:', serviceAccount.privateKey ? `✅ (${serviceAccount.privateKey.length} chars)` : '❌')
+
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`
+    databaseURL: `https://${serviceAccount.projectId}.firebaseio.com`
   })
-  console.log('✅ Firebase initialized')
+  console.log('✅ Firebase initialized successfully')
 } catch (error) {
-  console.error('❌ Firebase init error:', error)
+  console.error('❌ Firebase init error:', error.message)
+  process.exit(1)
 }
 
 const db = admin.firestore()
