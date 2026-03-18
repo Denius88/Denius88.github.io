@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Історія - Платформа для вивчення історії</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">📚 Історія Світу</div>
+            <ul class="nav-menu">
+                <li><a href="#timeline" class="nav-link active">Хронологія</a></li>
+                <li><a href="#events" class="nav-link">Події</a></li>
+                <li><a href="#testing" class="nav-link">Тестування</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="timeline" class="section">
+            <h1>Часова шкала історії</h1>
+            <p class="section-description">Ключові історичні події від давнини до сучасності</p>
+            
+            <div class="timeline" id="timeline-container">
+
+            </div>
+        </section>
+
+        <section id="events" class="section">
+            <h1>Деталі історичних подій</h1>
+            <p class="section-description">Глибокий аналіз ключових моментів в історії</p>
+            
+            <div class="events-container" id="events-container">
+
+            </div>
+        </section>
+
+        <section id="testing" class="section">
+            <h1>Перевір свої знання</h1>
+            <p class="section-description">Тест з історії для перевірки вашого рівня знань</p>
+            
+            <form class="test-form">
+                <div class="test-question">
+                    <h3>Питання 1: У якому році Колумб досягнув Америки?</h3>
+                    <div class="test-options">
+                        <label><input type="radio" name="q1" value="a"> <span>а) 1492</span></label>
+                        <label><input type="radio" name="q1" value="b"> <span>б) 1500</span></label>
+                        <label><input type="radio" name="q1" value="c"> <span>в) 1480</span></label>
+                        <label><input type="radio" name="q1" value="d"> <span>г) 1510</span></label>
+                    </div>
+                </div>
+
+                <div class="test-question">
+                    <h3>Питання 2: Хто був першим президентом США?</h3>
+                    <div class="test-options">
+                        <label><input type="radio" name="q2" value="a"> <span>а) Томас Джефферсон</span></label>
+                        <label><input type="radio" name="q2" value="b"> <span>б) Джордж Вашингтон</span></label>
+                        <label><input type="radio" name="q2" value="c"> <span>в) Авраам Лінкольн</span></label>
+                        <label><input type="radio" name="q2" value="d"> <span>г) Бенджамін Франклін</span></label>
+                    </div>
+                </div>
+
+                <div class="test-question">
+                    <h3>Питання 3: У якому році сталася Французька революція?</h3>
+                    <div class="test-options">
+                        <label><input type="radio" name="q3" value="a"> <span>а) 1775</span></label>
+                        <label><input type="radio" name="q3" value="b"> <span>б) 1789</span></label>
+                        <label><input type="radio" name="q3" value="c"> <span>в) 1800</span></label>
+                        <label><input type="radio" name="q3" value="d"> <span>г) 1770</span></label>
+                    </div>
+                </div>
+
+                <div class="test-question">
+                    <h3>Питання 4: Коли була розпущена СРСР?</h3>
+                    <div class="test-options">
+                        <label><input type="radio" name="q4" value="a"> <span>а) 1989</span></label>
+                        <label><input type="radio" name="q4" value="b"> <span>б) 1990</span></label>
+                        <label><input type="radio" name="q4" value="c"> <span>в) 1991</span></label>
+                        <label><input type="radio" name="q4" value="d"> <span>г) 1992</span></label>
+                    </div>
+                </div>
+
+                <button type="button" class="submit-btn" onclick="checkAnswers()">Перевірити відповіді</button>
+                <div id="result" class="result"></div>
+            </form>
+        </section>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Деталі événий</h2>
+            <p id="modal-date"><strong>Дата:</strong></p>
+            <p id="modal-description"></p>
+            <p id="modal-details"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 - Лабораторна робота №2: Основи JavaScript</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
