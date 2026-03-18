@@ -1,0 +1,13 @@
+# Vite/React Frontend
+node_modules/
+.env
+.env.local
+dist/
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
